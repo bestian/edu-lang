@@ -3,7 +3,7 @@
 const fs = require('fs');
 
 function parseMarkdownToStructure(markdownText) {
-    const lines = markdownText.split("\n");
+    const lines = markdownText.split('\n');
     const pattern = /\[(.*?)\]\((.*?)\)/;
     const steps = [];
     const intros = [];
@@ -18,10 +18,10 @@ function parseMarkdownToStructure(markdownText) {
             continue;
         }
 
-        // Check for lines that start with exactly one "#"
-        if (trimmedLine.startsWith("#") && !trimmedLine.startsWith("##")) {
-            const tagList = trimmedLine.split(" ").filter(tag => tag.startsWith("#"));
-            tags.push(...tagList.map(tag => tag.replace("#", "")));
+        // Check for lines that start with exactly one '#'
+        if (trimmedLine.startsWith('#') && !trimmedLine.startsWith('##')) {
+            const tagList = trimmedLine.split(' ').filter(tag => tag.startsWith('#'));
+            tags.push(...tagList.map(tag => tag.replace('#', '')));
             continue;
         }
 
@@ -38,29 +38,29 @@ function parseMarkdownToStructure(markdownText) {
 
         const matches = trimmedLine.match(pattern);
         if (matches && matches.length >= 3) {
-            const link = matches[2].startsWith("!") ? matches[2].substring(1) : matches[2];
-            if (matches[2].startsWith("!")) {
+            const link = matches[2].startsWith('!') ? matches[2].substring(1) : matches[2];
+            if (matches[2].startsWith('!')) {
                 steps.push({
-                    "r": link,
-                    "n": matches[1]
+                    'r': link,
+                    'n': matches[1]
                 });
             } else {
                 steps.push({
-                    "h": link,
-                    "n": matches[1]
+                    'h': link,
+                    'n': matches[1]
                 });
             }
         } else {
             steps.push({
-                "n": trimmedLine
+                'n': trimmedLine
             });
         }
     }
 
     return {
-        "intros": intros,
-        "tags": tags,
-        "steps": steps
+        'intros': intros,
+        'tags': tags,
+        'steps': steps
     };
 }
 
