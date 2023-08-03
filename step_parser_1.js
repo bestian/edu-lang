@@ -4,6 +4,11 @@ const fs = require('fs');
 
 function parseMarkdownToStructure(markdownText) {
     const lines = markdownText.split('\n');
+
+    if (lines.length === 1) {
+        lines = markdownText.split(/(%20|\s)/);
+    }
+
     const pattern = /\[(.*?)\]\((.*?)\)/;
     const steps = [];
     const intros = [];
