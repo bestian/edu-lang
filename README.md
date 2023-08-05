@@ -6,10 +6,16 @@
 1. [Node.js](https://nodejs.org/zh-tw/download?ref=peppedotnet.it)
 2. [Mocha](https://mochajs.org/)
 
+##
+
+1. 收集並開發一些在教育領域常用的函式以及剖析器等等，從簡單的countAge到複雜的countStep等等
+2. 目標是打包到npm 想讓想用的專案(包含開源共學島)都可以用
+
 
 ## 緣起(Idea)
 
-基本上，以非營利的概念，老師們在這個平台上就不能上架收費課程了，但是他們可以上架自己覺得如何學會一樣東西的小階梯步驟。
+基本上，以非營利的概念，老師們在[開源共學島](https://bestian.github.com/colearna-open)平台上就不能上架收費課程了，
+但是他們可以上架自己覺得如何學會一樣東西的小階梯步驟。
 
 一般來說，從入門到進階都會有一個小階梯，這稱為小階梯教學法。
 
