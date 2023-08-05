@@ -1,5 +1,9 @@
 const { mdToURI } = require('./src/md-minify.js')
-const { parseMarkdownToSteps, step_input } = require('./src/parseSteps.js')
+const { parseMarkdownToSteps, 
+    parseSimpleSteps,
+    parseComplexSteps,
+    step_input
+} = require('./src/parseSteps.js')
 
 console.log(parseMarkdownToSteps)
 
@@ -32,5 +36,7 @@ module.exports = {
     countAge,
     parseTags,
     parseMarkdownToSteps,
+    parseSimpleSteps,
+    parseComplexSteps,
     step_input
 };

@@ -2,12 +2,30 @@ const {
   countAge,
   parseTags,
   mdToURI,
-  parseMarkdownToSteps,   //  =>  intros: Array, tags: Array, steps ==> Array  
+  parseMarkdownToSteps,   // md:String =>  intros: Array, tags: Array, steps ==> Array  
+  parseSimpleSteps,  //  md:String =>  steps ==> Array  
+  parseComplexSteps, //  md:String =>  title:String, intros: Array, img:String, tags: Array, steps ==> Array  
   step_input,
  } = require('./index.js');
 
 const step_output = {
   "intros": [ "## 學習料理的步驟", "學習料理，其實很簡單"],
+  "tags": ["生活", "廚藝", "抒壓"],
+  "steps": [
+    { "n": "1.先在家裡廚房幫忙" },
+    { "n": "2.觀察外食店家的食材搭配" },
+    { "n": "3.採購的時候，幫忙一起採購" },
+    { "h": "https://food.bestian.tw", "n": "自然美食DIY網站" },
+    { "n": "5.可以自己研發一些料理來嘗試看看" },
+    { "n": "6.還可以借圖書館的一些食譜書，學習健康飲食" },
+    { "r": "about", "n": "關於我們" }
+  ]
+}
+
+const step_output_complex = {
+  "title": "## 學習料理的步驟",
+  "intros": ["學習料理，其實很簡單"],
+  "imgs": [""],
   "tags": ["生活", "廚藝", "抒壓"],
   "steps": [
     { "n": "1.先在家裡廚房幫忙" },
@@ -29,7 +47,6 @@ describe('parseTags', function () {
               // add Error case ....
   });
 });
-
 
 describe('mdToURI', function () {
   it(`minify a markdown and make it to URI`, function () {
@@ -57,4 +74,15 @@ describe('parseMarkdownToSteps', function () {
       return parseMarkdownToSteps(step_input) == step_output
       // add Error case ....
   });
+
+  it(`simple steps only.`, function () {
+      return parseSimpleSteps(step_input) == step_output.steps
+      // add Error case ....
+  });
+
+  it(`complex case should contain imgs.`, function () { //  md:String =>  title:String, intros: Array, img:String, tags: Array, steps ==> Array
+      return parseComplexSteps(step_input) == step_output_complex
+      // add Error case ....
+  });
 });
+

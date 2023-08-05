@@ -37,9 +37,23 @@ function parseMarkdownToSteps(markdownText) {
             });
         }
     }
-
     return {intros: intros, steps: steps};
 }
+
+function parseSimpleSteps(markdownText) {
+    return parseMarkdownToSteps(markdownText).steps
+}
+
+function parseComplexSteps(markdownText) {
+    var obj = parseMarkdownToSteps(markdownText).steps
+    var intros = parseMarkdownToSteps(markdownText).intros
+    obj.title = (intros || []).unshift()
+    obj.intros = (intros.filter(x => !x.match(/\.(jpg|png|gif|webp)$/)))[0]
+    obj.img = (intros.filter(x => x.match(/\.(jpg|png|gif|webp)$/)))[0]
+    return obj
+}
+
+
 
 const step_input = `
 ## 學習料理的步驟
@@ -55,4 +69,9 @@ const step_input = `
 6.還可以借圖書館的一些食譜書，學習健康飲食
 7.請看[關於我們](!about)`
 
-module.exports = { parseMarkdownToSteps, step_input }
+module.exports = { 
+    parseMarkdownToSteps, 
+    parseSimpleSteps,
+    parseComplexSteps,
+    step_input 
+}
