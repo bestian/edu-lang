@@ -1,3 +1,20 @@
+function countAge(birthday) {
+    var birthdayDate = new Date(birthday);
+    var todayDate = new Date();
+
+    var age = todayDate.getFullYear() - birthdayDate.getFullYear();
+
+    if (
+        todayDate.getMonth() < birthdayDate.getMonth() ||
+        (todayDate.getMonth() == birthdayDate.getMonth() &&
+        todayDate.getDate() < birthdayDate.getDate())
+    ) {
+        age--;
+    }
+
+    return age;
+}
+
 function parseMarkdownToStructure(markdownText) {
     const lines = markdownText.split('\n');
     const pattern = /\[(.*?)\]\((.*?)\)/;
@@ -55,6 +72,7 @@ const step_input = `
 7.請看[關於我們](!about)`
 
 module.exports = {
+    countAge,
     parseMarkdownToStructure,
     step_input
 };

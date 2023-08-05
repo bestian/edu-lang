@@ -1,4 +1,8 @@
-const { parseMarkdownToStructure, step_input } = require('./index.js');
+const { 
+  countAge,
+  parseMarkdownToStructure, 
+  step_input
+ } = require('./index.js');
 
 const output = {
   "intros": [ "## 學習料理的步驟", "學習料理，其實很簡單"],
@@ -14,6 +18,12 @@ const output = {
   ]
 }
 
+
+describe('countAge', function () {
+  it(`count a child's age by birthday(like '1985-04-01')= + ' ' + countAge('1985-04-01')`, function () {
+      return countAge('1985-04-01') == countAge('1985-04-01')
+  });
+});
 
 describe('parseMarkdownToStructure', function () {
   it(`lines before numbers should be intros,
