@@ -1,10 +1,12 @@
 const { 
   countAge,
-  parseMarkdownToStructure, 
-  step_input
+  parseTags,
+  mdToURI,
+  parseMarkdownToSteps,   //  =>  intros: Array, tags: Array, steps ==> Array  
+  step_input,
  } = require('./index.js');
 
-const output = {
+const step_output = {
   "intros": [ "## 學習料理的步驟", "學習料理，其實很簡單"],
   "tags": ["生活", "廚藝", "抒壓"],
   "steps": [
@@ -19,17 +21,40 @@ const output = {
 }
 
 
-describe('countAge', function () {
-  it(`count a child's age by birthday(like '1985-04-01')= + ' ' + countAge('1985-04-01')`, function () {
-      return countAge('1985-04-01') == countAge('1985-04-01')
+describe('parseTags', function () {
+  it(`split a tags list`, function () {
+      return parseTags(['foo,bar,baz'] == ['foo'],['bar'],['baz']) &&
+              parseTags(['foo'] == ['foo']) && 
+              parseTags([''] == [])
+              // add Error case ....
   });
 });
 
-describe('parseMarkdownToStructure', function () {
+
+describe('mdToURI', function () {
+  it(`minify a markdown and make it to URI`, function () {
+      return mdToURI(`
+        foo
+        bar
+
+        baz
+      `) == countAge('foo%20bar%20baz%20')
+  });
+});
+
+describe('countAge', function () {
+  it(`count a child's age by birthday(like '1985-04-01')= + ' ' + countAge('1985-04-01')`, function () {
+      return countAge('1985-04-01') == countAge('1985-04-01')
+      // add Error case ....
+  });
+});
+
+describe('parseMarkdownToSteps', function () {
   it(`lines before numbers should be intros,
     lines started with numbers should be steps.
     objects in steps should have "n", perhaps have h(href) or r(inner router links) 
     `, function () {
-      return parseMarkdownToStructure(step_input) == output
+      return parseMarkdownToSteps(step_input) == step_output
+      // add Error case ....
   });
 });
