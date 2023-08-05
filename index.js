@@ -1,8 +1,3 @@
-#!/usr/bin/env node
-
-const fs = require('fs');
-
-
 function parseMarkdownToStructure(markdownText) {
     const lines = markdownText.split('\n');
     const pattern = /\[(.*?)\]\((.*?)\)/;
@@ -45,21 +40,21 @@ function parseMarkdownToStructure(markdownText) {
     return {intros: intros, steps: steps};
 }
 
+const step_input = `
+## 學習料理的步驟
+學習料理，其實很簡單
 
-// Ensure an input file is provided
-if (process.argv.length < 3) {
-    console.error('Please provide an input Markdown file.');
-    process.exit(1);
-}
+#生活 #廚藝 #抒壓
 
-const inputFile = process.argv[2];
+1.先在家裡廚房幫忙
+2.觀察外食店家的食材搭配
+3.採購的時候，幫忙一起採購 
+4.可以到[自然美食DIY網站](https://food.bestian.tw)找食譜
+5.可以自己研發一些料理來嘗試看看
+6.還可以借圖書館的一些食譜書，學習健康飲食
+7.請看[關於我們](!about)`
 
-fs.readFile(inputFile, 'utf8', (err, data) => {
-    if (err) {
-        console.error('Error reading the file:', err);
-        process.exit(1);
-    }
-
-    const minifiedContent = parseMarkdownToStructure(data);
-    console.log(minifiedContent);
-});
+module.exports = {
+    parseMarkdownToStructure,
+    step_input
+};

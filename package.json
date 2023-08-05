@@ -1,0 +1,23 @@
+{
+  "name": "edu-lang",
+  "version": "0.0.1",
+  "description": "mete-languages parsers for educational sharing",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "edu-lang"
+  },
+  "keywords": [
+    "education",
+    "meta",
+    "lang",
+    "frontend",
+    "markdown",
+    "parser"
+  ],
+  "author": "Bestian",
+  "license": "ISC"
+}
