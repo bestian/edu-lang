@@ -84,5 +84,13 @@ describe('parseMarkdownToSteps', function () {
       return parseComplexSteps(step_input) == step_output_complex
       // add Error case ....
   });
+
+  /* 
+
+    parseSimpleTable          =>  take and parse ./data_table/*.txt
+    parseComplexTable         =>  take and parse ./data_table_with_href/*.txt
+
+
+  */
 });
 
