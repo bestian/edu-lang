@@ -1,6 +1,11 @@
 # edu-lang
  meta language ideas for edu( sublanguage of markdown ) I/O examples 
 
+# 開發環境
+
+1. [Node.js](https://nodejs.org/zh-tw/download?ref=peppedotnet.it)
+2. [Mocha](https://mochajs.org/)
+
 
 ## 緣起(Idea)
 
