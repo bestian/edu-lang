@@ -8,7 +8,7 @@
 
 ##
 
-1. 收集並開發一些在教育領域常用的函式以及剖析器等等，從簡單的countAge到複雜的countStep等等
+1. 收集並開發一些在教育領域常用的函式以及剖析器等等，從簡單的countAge到複雜的countStep, countTable, countTree, countClimbingStones等等
 2. 為開源共學島提供基礎建設
 3. 目標是打包到npm 想讓想用的專案都可以用
 
