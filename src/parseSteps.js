@@ -29,7 +29,7 @@ function parseMarkdownToSteps(markdownText) {
         if (matches && matches.length >= 3) {
             steps.push({
                 h: matches[2],
-                n: matches[1],
+                n: trimmedLine,
             });
         } else {
             steps.push({

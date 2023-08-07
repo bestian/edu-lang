@@ -5,7 +5,7 @@ const { parseMarkdownToSteps,
     step_input
 } = require('./src/parseSteps.js')
 
-console.log(parseMarkdownToSteps)
+// console.log(parseMarkdownToSteps)
 
 function countAge(birthday) {
     var birthdayDate = new Date(birthday);

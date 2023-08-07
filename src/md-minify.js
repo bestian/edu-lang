@@ -6,6 +6,6 @@ function mdToURI(content) {
     return encodeURI(minified);
 }
 
-console.log(mdToURI)
+// console.log(mdToURI)
 
 module.exports = { mdToURI }
