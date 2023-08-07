@@ -1,3 +1,5 @@
+const assert = require('assert');
+
 const { 
   countAge,
   parseTags,
@@ -40,10 +42,10 @@ const step_output_complex = {
 
 
 describe('parseTags', function () {
-  it(`split a tags list`, function () {
-      return parseTags(['foo,bar,baz'] == ['foo'],['bar'],['baz']) &&
-              parseTags(['foo'] == ['foo']) && 
-              parseTags([''] == [])
+  it(`split a tags list`,  () => {
+    assert.strictEqual(parseTags('',  []), 'null case');
+    assert.strictEqual(parseTags('foo,bar,baz'), ['foo','bar','baz']);
+    assert.strictEqual(parseTags('foo'),['foo']);
               // add Error case ....
   });
 });

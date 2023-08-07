@@ -1,7 +1,10 @@
 
 function parseMarkdownToSteps(markdownText) {
     const lines = markdownText.split('\n');
-    const pattern = /\[(.*?)\]\((.*?)\)/;
+    const pattern_n = /(.{3,})/;
+    const pattern_D = /^(\d+)\.?.{1,}$/;
+    const pattern_D2 = /^(\d+)\.?.*\[(.*?)\]\((.*?)\).$/;
+    const pattern_href = /\((.*?)\)/g;
     const steps = [];
     const intros = [];
     let foundNumber = false;
@@ -10,12 +13,12 @@ function parseMarkdownToSteps(markdownText) {
         const trimmedLine = line.trim();
         
         // Skip empty lines
-        if (!trimmedLine) {
+        if (!trimmedLine || !pattern_n.test(trimmedLine)) {
             continue;
         }
 
         // Check if the line starts with a number
-        if (/^\d/.test(trimmedLine)) {
+        if (pattern_D.test(trimmedLine)) {
             foundNumber = true;
         }
 
@@ -25,11 +28,11 @@ function parseMarkdownToSteps(markdownText) {
             continue;
         }
 
-        const matches = trimmedLine.match(pattern);
+        const matches = trimmedLine.match(pattern_D2);
         if (matches && matches.length >= 3) {
             steps.push({
                 h: matches[2],
-                n: trimmedLine,
+                n: trimmedLine.replace(pattern_href, '')
             });
         } else {
             steps.push({
