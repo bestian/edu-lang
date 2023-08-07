@@ -4,36 +4,12 @@ const { parseMarkdownToSteps,
     parseComplexSteps,
     step_input
 } = require('./src/parseSteps.js')
-
-// console.log(parseMarkdownToSteps)
-
-function countAge(birthday) {
-    var birthdayDate = new Date(birthday);
-    var todayDate = new Date();
-
-    var age = todayDate.getFullYear() - birthdayDate.getFullYear();
-
-    if (
-        todayDate.getMonth() < birthdayDate.getMonth() ||
-        (todayDate.getMonth() == birthdayDate.getMonth() &&
-        todayDate.getDate() < birthdayDate.getDate())
-    ) {
-        age--;
-    }
-
-    return age;
-}
-
-
-// add Error case ....
-function parseTags(tags) {
-    return (tags || '').split(',')
-}
-
+const { parseTags } = require('./src/parseTags.js')
+const { countAge, countAgeDiff } = require('./src/countAge.js')
 
 module.exports = {
     mdToURI,
-    countAge,
+    countAge, countAgeDiff,
     parseTags,
     parseMarkdownToSteps,
     parseSimpleSteps,
