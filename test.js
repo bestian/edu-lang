@@ -1,6 +1,7 @@
 const assert = require('assert');
 
 const { 
+  autoId,
   countAge,
   countAgeDiff,
   parseTags,
@@ -41,6 +42,34 @@ const step_output_complex = {
   ]
 }
 
+describe('parseMarkdownToSteps', function () {
+  it(`lines before numbers should be intros,
+    lines started with numbers should be steps.
+    objects in steps should have "n", perhaps have h(href) or r(inner router links) 
+    `, function () {
+      assert.deepStrictEqual(parseMarkdownToSteps(step_input),step_output)
+      // add Error case ....
+  });
+
+  it(`simple steps only.`, function () {
+      assert.deepStrictEqual(parseSimpleSteps(step_input), step_output.steps)
+      // add Error case ....
+  });
+
+  it(`complex case should contain imgs.`, function () { //  md:String =>  title:String, intros: Array, img:String, tags: Array, steps ==> Array
+    assert.deepStrictEqual(parseComplexSteps(step_input),  step_output_complex)
+      // add Error case ....
+  });
+
+  /* 
+
+    parseSimpleTable          =>  take and parse ./data_table/*.txt
+    parseComplexTable         =>  take and parse ./data_table_with_href/*.txt
+
+
+  */
+});
+
 
 describe('parseTags', function () {
   it(`split a tags list`,  () => {
@@ -70,31 +99,12 @@ describe('countAge', function () {
   });
 });
 
-describe('parseMarkdownToSteps', function () {
-  it(`lines before numbers should be intros,
-    lines started with numbers should be steps.
-    objects in steps should have "n", perhaps have h(href) or r(inner router links) 
-    `, function () {
-      assert.deepStrictEqual(parseMarkdownToSteps(step_input),step_output)
+
+describe('autoId', function () {
+  it(`make a autoId by name`, function () {
+      assert.strictEqual(autoId('foo'),autoId('foo'))
       // add Error case ....
   });
-
-  it(`simple steps only.`, function () {
-      assert.deepStrictEqual(parseSimpleSteps(step_input), step_output.steps)
-      // add Error case ....
-  });
-
-  it(`complex case should contain imgs.`, function () { //  md:String =>  title:String, intros: Array, img:String, tags: Array, steps ==> Array
-    assert.deepStrictEqual(parseComplexSteps(step_input),  step_output_complex)
-      // add Error case ....
-  });
-
-  /* 
-
-    parseSimpleTable          =>  take and parse ./data_table/*.txt
-    parseComplexTable         =>  take and parse ./data_table_with_href/*.txt
-
-
-  */
 });
+
 
