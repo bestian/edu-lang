@@ -72,23 +72,25 @@ function parseMarkdownToSteps(markdownText) {
 }
 
 const step_input = `
-## 學習料理的步驟
-學習料理，其實很簡單
+    歡迎參與開源共學島的共創：
+    有興趣者請進行以下協同步驟：
 
-#生活 #廚藝 #抒壓
+    #參與 #協作 #開源
 
-1. 先在家裡廚房幫忙
-2. 可以到[自然美食DIY網站](https://food.bestian.tw)
-3. 請看[關於我們](!about)`;
-
+    1. 進入[Github開源共學島專案](https://github.com/bestian/colearna-open/)。
+    2. 點選[參與本專案](https://github.com/bestian/colearna-open/wiki/%E5%8F%83%E8%88%87%E6%9C%AC%E5%B0%88%E6%A1%88(Join-Us))
+    3. 透過網站註冊，加入共學島的測試會員，測試跑流。
+    4. 請看[關於我們](!about)
+`;
 
 
 const step_output = {
-"intros": [ "## 學習料理的步驟", "學習料理，其實很簡單"],
-"tags": ["生活", "廚藝", "抒壓"],
+"intros": [ "歡迎參與開源共學島的共創：", "有興趣者請進行以下協同步驟："],
+"tags": ["參與", "協作", "開源"],
 "steps": [
-        { "n": "1. 先在家裡廚房幫忙" },
-        { "h": "https://food.bestian.tw", "n": "2. 可以到自然美食DIY網站" },
+        { "n": "1. 進入開源共學島專案", "h": "https://github.com/bestian/colearna-open/" },
+        { "n": "2. 點選參與本專案", "h": "https://github.com/bestian/colearna-open/wiki/%E5%8F%83%E8%88%87%E6%9C%AC%E5%B0%88%E6%A1%88(Join-Us)" },
+        { "n": "透過網站註冊，加入共學島的測試會員，測試跑流。"}
         { "r": "/about", "n": "3. 請看關於我們" }
     ]
 }
