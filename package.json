@@ -1,6 +1,6 @@
 {
   "name": "edu-lang",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "mete-languages parsers for educational sharing",
   "main": "index.js",
   "scripts": {

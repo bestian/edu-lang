@@ -50,7 +50,7 @@ function parseMarkdownToSteps(markdownText) {
                 let newObject;
                 if (url.startsWith('!')) {
                     newObject = {
-                        r: url.slice(1),
+                        r: url.replace('!', '/'),
                         n: trimmedLine.replace(fullMatch, text),
                     };
                 } else if (url.startsWith('http')) {
@@ -89,7 +89,7 @@ const step_output = {
 "steps": [
         { "n": "1. 先在家裡廚房幫忙" },
         { "h": "https://food.bestian.tw", "n": "2. 可以到自然美食DIY網站" },
-        { "r": "about", "n": "3. 請看關於我們" }
+        { "r": "/about", "n": "3. 請看關於我們" }
     ]
 }
 
@@ -113,7 +113,7 @@ const step_output_complex = {
     "steps": [
         { "n": "1. 先在家裡廚房幫忙" },
         { "h": "https://food.bestian.tw", "n": "2. 自然美食DIY網站" },
-        { "r": "about", "n": "3. 關於我們" }
+        { "r": "/about", "n": "3. 關於我們" }
     ]
 }
 
