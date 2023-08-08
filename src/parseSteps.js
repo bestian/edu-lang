@@ -1,9 +1,24 @@
 
+function parseSimpleSteps(markdownText) {
+    return parseMarkdownToSteps(markdownText).steps
+}
+
+function parseComplexSteps(markdownText) {
+    var obj = parseMarkdownToSteps(markdownText).steps
+    var intros = parseMarkdownToSteps(markdownText).intros
+
+    console.log(intros)
+
+    obj.title = (intros || []).unshift()
+    obj.intros = (intros.filter(x => !x.match(/\.(jpg|png|gif|webp)$/))) || []
+    obj.imgs = ((intros.filter(x => x.match(/\.(jpg|png|gif|webp)$/)))[0] || []).filter(x => x.trim())  // 有可能是空陣列
+    return obj
+}
+
 function parseMarkdownToSteps(markdownText) {
     const lines = markdownText.split('\n');
-    const pattern_n = /(.{1,})/;
-    const pattern_D = /^(\d+)\.?.{1,}$/;
-    const pattern_D2 = /^(\d+)\.?.*\[(.*?)\]\((.*?)\).$/;
+    const pattern_n = /(.+)/;
+    const pattern_D = /^(\d+)\.?.+$/;
     const pattern_href = /\[(.*?)\]\((.*?)\)/g;
     const steps = [];
     const intros = [];
@@ -14,7 +29,7 @@ function parseMarkdownToSteps(markdownText) {
 
         // Skip empty lines
         if (!trimmedLine || !pattern_n.test(trimmedLine)) {
-        continue;
+            continue;
         }
 
         // Check if the line starts with a number
@@ -30,45 +45,31 @@ function parseMarkdownToSteps(markdownText) {
 
         const matches = trimmedLine.match(pattern_href);
         if (matches && matches.length > 0) {
-        for (const match of matches) {
-            const [fullMatch, text, url] = match.match(/\[(.*?)\]\((.*?)\)/);
-            let newObject;
-            if (url.startsWith('!')) {
-            newObject = {
-                r: url.slice(1),
-                n: trimmedLine.replace(fullMatch, text),
-            };
-            } else {
-            newObject = {
-                h: url,
-                n: trimmedLine.replace(fullMatch, text),
-            };
+            for (const match of matches) {
+                const [fullMatch, text, url] = match.match(/\[(.*?)\]\((.*?)\)/);
+                let newObject;
+                if (url.startsWith('!')) {
+                    newObject = {
+                        r: url.slice(1),
+                        n: trimmedLine.replace(fullMatch, text),
+                    };
+                } else if (url.startsWith('http')) {
+                    newObject = {
+                        h: url,
+                        n: trimmedLine.replace(fullMatch, text),
+                    };
+                }
+                steps.push(newObject);
             }
-            steps.push(newObject);
-        }
         } else {
-        steps.push({
-            n: trimmedLine.replace(pattern_href, ''),
-        });
+            steps.push({
+                n: trimmedLine,
+            });
         }
     }
-    return { intros: intros, steps: steps };
+    const tags = intros.pop().split('#').map(x => x.replace(' ','')).filter(x => x.trim());
+    return { intros: intros, steps: steps, tags: tags };
 }
-
-function parseSimpleSteps(markdownText) {
-    return parseMarkdownToSteps(markdownText).steps
-}
-
-function parseComplexSteps(markdownText) {
-    var obj = parseMarkdownToSteps(markdownText).steps
-    var intros = parseMarkdownToSteps(markdownText).intros
-    obj.title = (intros || []).unshift()
-    obj.intros = (intros.filter(x => !x.match(/\.(jpg|png|gif|webp)$/)))[0]
-    obj.imgs = ((intros.filter(x => x.match(/\.(jpg|png|gif|webp)$/)))[0] || []).filter(x => x.trim())  // 有可能是空陣列
-    return obj
-}
-
-
 
 const step_input = `
 ## 學習料理的步驟
@@ -76,17 +77,50 @@ const step_input = `
 
 #生活 #廚藝 #抒壓
 
-1.先在家裡廚房幫忙
-2.觀察外食店家的食材搭配
-3.採購的時候，幫忙一起採購 
-4.可以到[自然美食DIY網站](https://food.bestian.tw)
-5.可以自己研發一些料理來嘗試看看
-6.還可以借圖書館的一些食譜書，學習健康飲食
-7.請看[關於我們](!about)`
+1. 先在家裡廚房幫忙
+2. 可以到[自然美食DIY網站](https://food.bestian.tw)
+3. 請看[關於我們](!about)`;
+
+
+
+const step_output = {
+"intros": [ "## 學習料理的步驟", "學習料理，其實很簡單"],
+"tags": ["生活", "廚藝", "抒壓"],
+"steps": [
+        { "n": "1. 先在家裡廚房幫忙" },
+        { "h": "https://food.bestian.tw", "n": "2. 可以到自然美食DIY網站" },
+        { "r": "about", "n": "3. 請看關於我們" }
+    ]
+}
+
+
+
+const setp_input_complex = `
+## 學習料理的步驟
+學習料理，其實很簡單
+
+#生活 #廚藝 #抒壓
+
+1. 先在家裡廚房幫忙
+2. 自然美食DIY網站
+3. 關於我們
+`
+const step_output_complex = {
+    "title": "## 學習料理的步驟",
+    "intros": ["學習料理，其實很簡單"],
+    "imgs": [],
+    "tags": ["生活", "廚藝", "抒壓"],
+    "steps": [
+        { "n": "1. 先在家裡廚房幫忙" },
+        { "h": "https://food.bestian.tw", "n": "2. 自然美食DIY網站" },
+        { "r": "about", "n": "3. 關於我們" }
+    ]
+}
 
 module.exports = { 
     parseMarkdownToSteps, 
     parseSimpleSteps,
     parseComplexSteps,
-    step_input 
+    step_input, step_output,
+    setp_input_complex, step_output_complex
 }
