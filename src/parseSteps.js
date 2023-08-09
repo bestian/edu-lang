@@ -90,8 +90,8 @@ const step_output = {
 "steps": [
         { "n": "1. 進入開源共學島專案", "h": "https://github.com/bestian/colearna-open/" },
         { "n": "2. 點選參與本專案", "h": "https://github.com/bestian/colearna-open/wiki/%E5%8F%83%E8%88%87%E6%9C%AC%E5%B0%88%E6%A1%88(Join-Us)" },
-        { "n": "透過網站註冊，加入共學島的測試會員，測試跑流。"}
-        { "r": "/about", "n": "3. 請看關於我們" }
+        { "n": "3. 透過網站註冊，加入共學島的測試會員，測試跑流。"},
+        { "r": "/about", "n": "4. 請看關於我們" }
     ]
 }
 
