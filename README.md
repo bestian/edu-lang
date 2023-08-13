@@ -5,7 +5,7 @@
 # 新手上路
 1. 請先看[共筆區(Wiki)](https://github.com/bestian/edu-lang/wiki)的首頁
 2. 錯誤回報與功能請求，請上[議題區(issues)](https://github.com/bestian/edu-lang/issues)
-3. 若您還沒有Gtihub帳號，請申請一個
+3. 若您還沒有Gtihub帳號，請[申請一個](https://git-scm.com/book/zh-tw/v2/GitHub-%E5%BB%BA%E7%AB%8B%E5%B8%B3%E6%88%B6%E5%8F%8A%E8%A8%AD%E5%AE%9A)
 4. 若您還不會[Markdown](https://markdown.tw/)，沒有關係，它很簡單，至少比html簡單。請看此頁[Markdown文法說明](https://markdown.tw/)，或是此[Markdown範本集](https://hackmd.io/@eMP9zQQ0Qt6I8Uqp2Vqy6w/SyiOheL5N/%2FBVqowKshRH246Q7UDyodFA?type=book)謝謝。
 6. 喜歡本專案的話，請記得幫忙訂閱(右上角的watch)和打星(右上角的star)集氣喔，謝謝！
 
