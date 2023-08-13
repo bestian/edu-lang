@@ -1,12 +1,13 @@
 #  教育元語言 edu-lang
-> meta languages for edu( sublanguage of markdown ), 例如：「步驟」(一種固定格式的小階梯說明文)
-> meta languages for edu( sublanguage of markdown ), e.x.  step
+> 一種專門為了教育方式或學習方法分享而設計的[Markdown](https://markdown.tw/)之子語言。例如：「步驟」(一種固定格式的小階梯說明文)
+> meta languages for edu( a set of sublanguage of [Markdown](https://en.wikipedia.org/wiki/Markdown) ), e.x.  step
  
 # 新手上路
 1. 請先看[共筆區(Wiki)](https://github.com/bestian/edu-lang/wiki)的首頁
 2. 錯誤回報與功能請求，請上[議題區(issues)](https://github.com/bestian/edu-lang/issues)
 3. 若您還沒有Gtihub帳號，請申請一個
-4. 喜歡本專案的話，請記得幫忙訂閱(右上角的watch)和打星(右上角的star)集氣喔，謝謝！
+4. 若您還不會[Markdown](https://markdown.tw/)，沒有關係，它很簡單，至少比html簡單。請看此頁[Markdown文法說明](https://markdown.tw/)，或是此[Markdown範本集](https://hackmd.io/@eMP9zQQ0Qt6I8Uqp2Vqy6w/SyiOheL5N/%2FBVqowKshRH246Q7UDyodFA?type=book)謝謝。
+6. 喜歡本專案的話，請記得幫忙訂閱(右上角的watch)和打星(右上角的star)集氣喔，謝謝！
 
 
 # 開發環境
