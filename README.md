@@ -14,6 +14,8 @@
 
 1. [Node.js](https://nodejs.org/zh-tw/download?ref=peppedotnet.it)
 2. [Mocha](https://mochajs.org/)
+3. [google slide]
+4. 足夠的血糖和熱情
 
 ##
 
