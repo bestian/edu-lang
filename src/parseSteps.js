@@ -1,18 +1,18 @@
 
 function parseSimpleSteps(markdownText) {
-    return parseMarkdownToSteps(markdownText).steps
+    return parseMarkdownToSteps(markdownText).steps;
 }
 
 function parseComplexSteps(markdownText) {
-    var obj = parseMarkdownToSteps(markdownText).steps
-    var intros = parseMarkdownToSteps(markdownText).intros
+    var obj = parseMarkdownToSteps(markdownText).steps;
+    var intros = parseMarkdownToSteps(markdownText).intros;
 
-    console.log(intros)
+    console.log(intros);
 
-    obj.title = (intros || []).unshift()
-    obj.intros = (intros.filter(x => !x.match(/\.(jpg|png|gif|webp)$/))) || []
-    obj.imgs = ((intros.filter(x => x.match(/\.(jpg|png|gif|webp)$/)))[0] || []).filter(x => x.trim())  // 有可能是空陣列
-    return obj
+    obj.title = (intros || []).unshift();
+    obj.intros = (intros.filter(x => !x.match(/\.(jpg|png|gif|webp)$/))) || [];
+    obj.imgs = ((intros.filter(x => x.match(/\.(jpg|png|gif|webp)$/)))[0] || []).filter(x => x.trim())  // 有可能是空陣列;
+    return obj;
 }
 
 function parseMarkdownToSteps(markdownText) {
@@ -21,45 +21,64 @@ function parseMarkdownToSteps(markdownText) {
     const pattern_D = /^(\d+)\.?.+$/;
     const pattern_href = /\[(.*?)\]\((.*?)\)/g;
     const steps = [];
+    const tips = [];
     const intros = [];
+    const tags = [];
     let foundNumber = false;
+    var pushToTips = false;
 
     for (const line of lines) {
         const trimmedLine = line.trim();
+        const pattern_t = /^tips+/;
+        const pattern_tags = /#(.+)/;
+        const isTips = pattern_t.test(trimmedLine);
 
-        // Skip empty lines
-        if (!trimmedLine || !pattern_n.test(trimmedLine)) {
+        // Skip empty lines;
+        if (!trimmedLine || !(pattern_n.test(trimmedLine))) {
             continue;
+        } else {
+            pushToTips = true;
         }
 
-        // Check if the line starts with a number
+        // Check if the line starts with a number;
         if (pattern_D.test(trimmedLine)) {
             foundNumber = true;
         }
 
-        // If we haven't found a line starting with a number, accumulate the lines as intros
-        if (!foundNumber) {
+        // If we haven't found a line starting with a number, accumulate the lines as intros;
+        if (!foundNumber && !pushToTips) {
             intros.push(trimmedLine);
             continue;
         }
 
+        //check if it is line of tags
+        const matcheTags = trimmedLine.match(pattern_tags);
         const matches = trimmedLine.match(pattern_href);
-        if (matches && matches.length > 0) {
+        var newObject = {}
+        if (matcheTags && matcheTags.length > 0) {
+            for (const match of matcheTags) {
+                const tag = match.split(/\s+/g, '');
+                tags.push(tag);
+            }
+        } else if (matches && matches.length > 0) {
             for (const match of matches) {
                 const [fullMatch, text, url] = match.match(/\[(.*?)\]\((.*?)\)/);
-                let newObject;
                 if (url.startsWith('!')) {
                     newObject = {
                         r: url.replace('!', '/'),
-                        n: trimmedLine.replace(fullMatch, text),
-                    };
+                        n: trimmedLine.replace(fullMatch, text)
+                    }
                 } else if (url.startsWith('http')) {
                     newObject = {
                         h: url,
-                        n: trimmedLine.replace(fullMatch, text),
-                    };
+                        n: trimmedLine.replace(fullMatch, text)
+                    }
                 }
-                steps.push(newObject);
+                if (!pushToTips) {
+                    steps.push(newObject);
+                } else {
+                    tips.push(newObject);
+                }
             }
         } else {
             steps.push({
@@ -67,8 +86,9 @@ function parseMarkdownToSteps(markdownText) {
             });
         }
     }
-    const tags = intros.pop().split('#').map(x => x.replace(' ','')).filter(x => x.trim());
-    return { intros: intros, steps: steps, tags: tags };
+    return { 
+        intros: intros, steps: steps, tags: tags, tips: tips
+    };
 }
 
 const step_input = `
@@ -96,7 +116,7 @@ const step_output = {
 }
 
 
-
+ 
 const setp_input_complex = `
 ## 學習料理的步驟
 學習料理，其實很簡單
@@ -106,6 +126,10 @@ const setp_input_complex = `
 1. 先在家裡廚房幫忙
 2. 自然美食DIY網站
 3. 關於我們
+
+tips: 
+1. 食物很好
+2. 素物更好
 `
 const step_output_complex = {
     "title": "## 學習料理的步驟",
@@ -116,6 +140,10 @@ const step_output_complex = {
         { "n": "1. 先在家裡廚房幫忙" },
         { "h": "https://food.bestian.tw", "n": "2. 自然美食DIY網站" },
         { "r": "/about", "n": "3. 關於我們" }
+    ],
+    "tips": [
+     "食物很好",
+     "素食更好"
     ]
 }
 
