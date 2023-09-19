@@ -15,7 +15,7 @@
 
 1. [Node.js](https://nodejs.org/zh-tw/download?ref=peppedotnet.it)
 2. [Mocha](https://mochajs.org/)
-3. [google slide
+3. google slide
 4. 足夠的血糖和熱情❤️‍🔥
 
 ##
@@ -41,3 +41,14 @@
 ## 應用(Application)
 
 * [Hackstep](https://github.com/3dw/hackstep)  開發中...
+
+# 測試和發佈
+
+## 測試
+```mocha test```
+
+## 發佈
+
+1. 先增加packge.json裡的版本號
+```npm publish```
+

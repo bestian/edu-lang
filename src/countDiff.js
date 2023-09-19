@@ -32,7 +32,7 @@ function manhattanDistance(arr1, arr2) {
 }
 
 const distance = manhattanDistance(inputUser1, inputUser2);
-console.log("曼哈頓距離是:", distance);
+// console.log("曼哈頓距離是:", distance);
 
 
 module.exports = { 

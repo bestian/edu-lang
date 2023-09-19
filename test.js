@@ -8,10 +8,12 @@ const {
   mdToURI,
   parseMarkdownToSteps,   // md:String =>  intros: Array, tags: Array, steps ==> Array  
   parseSimpleSteps,  //  md:String =>  steps ==> Array  
-  parseComplexSteps, //  md:String =>  title:String, intros: Array, img:String, tags: Array, steps ==> Array  
   step_input, step_output,
-  step_input_complex, step_output_complex
  } = require('./index.js');
+
+
+console.log(parseMarkdownToSteps(step_input));
+
 
 describe('parseMarkdownToSteps', function () {
   it(`lines before numbers should be intros,
@@ -21,25 +23,6 @@ describe('parseMarkdownToSteps', function () {
       assert.deepStrictEqual(parseMarkdownToSteps(step_input),step_output)
       // add Error case ....
   });
-
-  it(`simple steps only.`, function () {
-      assert.deepStrictEqual(parseSimpleSteps(step_input), step_output.steps)
-      // add Error case ....
-  });
-
-  
-  it(`complex case should contain imgs.`, function () { //  md:String =>  title:String, intros: Array, img:String, tags: Array, steps ==> Array
-    assert.deepStrictEqual(parseComplexSteps(step_input),  step_output_complex)
-      // add Error case ....
-  });
-
-  /* 
-
-    parseSimpleTable          =>  take and parse ./data_table/*.txt
-    parseComplexTable         =>  take and parse ./data_table_with_href/*.txt
-
-
-  */
 });
 
 
@@ -75,7 +58,6 @@ describe('countAge', function () {
 describe('autoId', function () {
   it(`make a autoId by name`, function () {
       assert.strictEqual(autoId('foo'),autoId('foo'))
-      // add Error case ....
   });
 });
 

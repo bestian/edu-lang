@@ -14,7 +14,7 @@ function countDimensions(inputRealUser1, inputRealUser2) {
 }
 
 const uniqueTags = countDimensions(inputRealUser1, inputRealUser2);
-console.log("合併後的標籤（無重複）:", uniqueTags);
+// console.log("合併後的標籤（無重複）:", uniqueTags);
 // 這個函數將標籤字串轉換為標籤數組
 
 
